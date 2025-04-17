@@ -1,0 +1,12 @@
+# requirements_fixed.txt - compatible with Python 3.12
+streamlit
+openai>=1.6.1,<2.0.0
+langchain
+langchain-experimental
+langchain-community
+langchain-openai
+python-dotenv
+tiktoken>=0.5.2,<0.6.0
+pandas
+numpy
+pydantic<2.0.0 

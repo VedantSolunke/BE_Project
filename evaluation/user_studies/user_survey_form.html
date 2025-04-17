@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Assistance Platform Evaluation Survey</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #2c3e50; }
+        .section { margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px; }
+        .question { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], textarea { width: 100%; padding: 8px; }
+        textarea { height: 100px; }
+        .rating { display: flex; flex-direction: row; margin-top: 5px; }
+        .rating label { margin-right: 10px; font-weight: normal; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Legal Assistance Platform Evaluation Survey</h1>
+    <p>Thank you for participating in this evaluation of our Legal Assistance Platform. Your feedback is valuable for improving the system.</p>
+    <form id="surveyForm">
+    <div class="section">
+        <h2>Participant Information</h2>
+        <div class="question">
+            <label for="participant_id">Participant ID:</label>
+            <input type="text" id="participant_id" name="participant_id" required>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Demographics</h2>
+        <div class="question">
+            <label for="role">What is your professional role?</label>
+            <select id="role" name="role">
+                <option value="">-- Please select --</option>
+                <option value="Law Student">Law Student</option>
+                <option value="Legal Practitioner">Legal Practitioner</option>
+                <option value="Judge">Judge</option>
+                <option value="Law Professor">Law Professor</option>
+                <option value="Legal Researcher">Legal Researcher</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="experience">Years of experience in the legal field:</label>
+            <select id="experience" name="experience">
+                <option value="">-- Please select --</option>
+                <option value="0-2 years">0-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="6-10 years">6-10 years</option>
+                <option value="11-20 years">11-20 years</option>
+                <option value="More than 20 years">More than 20 years</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="tech_comfort">How would you rate your comfort level with legal technology tools?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="tech_comfort" value="1">
+                    1 - Not comfortable
+                </label>
+                <label>
+                    <input type="radio" name="tech_comfort" value="2">
+                    2 - Somewhat comfortable
+                </label>
+                <label>
+                    <input type="radio" name="tech_comfort" value="3">
+                    3 - Neutral
+                </label>
+                <label>
+                    <input type="radio" name="tech_comfort" value="4">
+                    4 - Comfortable
+                </label>
+                <label>
+                    <input type="radio" name="tech_comfort" value="5">
+                    5 - Very comfortable
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>System Usability</h2>
+        <div class="question">
+            <label for="ease_of_use">How easy was it to use the platform?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="ease_of_use" value="1">
+                    1 - Very difficult
+                </label>
+                <label>
+                    <input type="radio" name="ease_of_use" value="2">
+                    2 - Difficult
+                </label>
+                <label>
+                    <input type="radio" name="ease_of_use" value="3">
+                    3 - Neutral
+                </label>
+                <label>
+                    <input type="radio" name="ease_of_use" value="4">
+                    4 - Easy
+                </label>
+                <label>
+                    <input type="radio" name="ease_of_use" value="5">
+                    5 - Very easy
+                </label>
+            </div>
+        </div>
+        <div class="question">
+            <label for="interface_clarity">How clear and intuitive was the user interface?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="interface_clarity" value="1">
+                    1 - Very confusing
+                </label>
+                <label>
+                    <input type="radio" name="interface_clarity" value="2">
+                    2 - Confusing
+                </label>
+                <label>
+                    <input type="radio" name="interface_clarity" value="3">
+                    3 - Neutral
+                </label>
+                <label>
+                    <input type="radio" name="interface_clarity" value="4">
+                    4 - Clear
+                </label>
+                <label>
+                    <input type="radio" name="interface_clarity" value="5">
+                    5 - Very clear
+                </label>
+            </div>
+        </div>
+        <div class="question">
+            <label for="response_time">How would you rate the system's response time?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="response_time" value="1">
+                    1 - Very slow
+                </label>
+                <label>
+                    <input type="radio" name="response_time" value="2">
+                    2 - Slow
+                </label>
+                <label>
+                    <input type="radio" name="response_time" value="3">
+                    3 - Acceptable
+                </label>
+                <label>
+                    <input type="radio" name="response_time" value="4">
+                    4 - Fast
+                </label>
+                <label>
+                    <input type="radio" name="response_time" value="5">
+                    5 - Very fast
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Result Quality</h2>
+        <div class="question">
+            <label for="relevance">How relevant were the IPC sections returned for your test cases?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="relevance" value="1">
+                    1 - Not relevant
+                </label>
+                <label>
+                    <input type="radio" name="relevance" value="2">
+                    2 - Somewhat relevant
+                </label>
+                <label>
+                    <input type="radio" name="relevance" value="3">
+                    3 - Moderately relevant
+                </label>
+                <label>
+                    <input type="radio" name="relevance" value="4">
+                    4 - Relevant
+                </label>
+                <label>
+                    <input type="radio" name="relevance" value="5">
+                    5 - Highly relevant
+                </label>
+            </div>
+        </div>
+        <div class="question">
+            <label for="completeness">How complete was the set of returned IPC sections (were any important sections missing)?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="completeness" value="1">
+                    1 - Very incomplete
+                </label>
+                <label>
+                    <input type="radio" name="completeness" value="2">
+                    2 - Missing sections
+                </label>
+                <label>
+                    <input type="radio" name="completeness" value="3">
+                    3 - Moderately complete
+                </label>
+                <label>
+                    <input type="radio" name="completeness" value="4">
+                    4 - Mostly complete
+                </label>
+                <label>
+                    <input type="radio" name="completeness" value="5">
+                    5 - Very complete
+                </label>
+            </div>
+        </div>
+        <div class="question">
+            <label for="accuracy">How accurate was the LLM analysis of the case?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="accuracy" value="1">
+                    1 - Not accurate
+                </label>
+                <label>
+                    <input type="radio" name="accuracy" value="2">
+                    2 - Somewhat accurate
+                </label>
+                <label>
+                    <input type="radio" name="accuracy" value="3">
+                    3 - Moderately accurate
+                </label>
+                <label>
+                    <input type="radio" name="accuracy" value="4">
+                    4 - Accurate
+                </label>
+                <label>
+                    <input type="radio" name="accuracy" value="5">
+                    5 - Highly accurate
+                </label>
+            </div>
+        </div>
+        <div class="question">
+            <label for="ranking_quality">How well were the results ranked by relevance?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="ranking_quality" value="1">
+                    1 - Poor ranking
+                </label>
+                <label>
+                    <input type="radio" name="ranking_quality" value="2">
+                    2 - Fair ranking
+                </label>
+                <label>
+                    <input type="radio" name="ranking_quality" value="3">
+                    3 - Acceptable ranking
+                </label>
+                <label>
+                    <input type="radio" name="ranking_quality" value="4">
+                    4 - Good ranking
+                </label>
+                <label>
+                    <input type="radio" name="ranking_quality" value="5">
+                    5 - Excellent ranking
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Comparative</h2>
+        <div class="question">
+            <label for="compared_to_manual">Compared to manual legal research, this system is:</label>
+            <select id="compared_to_manual" name="compared_to_manual">
+                <option value="">-- Please select --</option>
+                <option value="Much worse">Much worse</option>
+                <option value="Worse">Worse</option>
+                <option value="About the same">About the same</option>
+                <option value="Better">Better</option>
+                <option value="Much better">Much better</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="compared_to_existing">Compared to existing legal search tools you've used, this system is:</label>
+            <select id="compared_to_existing" name="compared_to_existing">
+                <option value="">-- Please select --</option>
+                <option value="Much worse">Much worse</option>
+                <option value="Worse">Worse</option>
+                <option value="About the same">About the same</option>
+                <option value="Better">Better</option>
+                <option value="Much better">Much better</option>
+                <option value="N/A">N/A</option>
+            </select>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Task Completion</h2>
+        <div class="question">
+            <label for="task_completion_time">Approximately how long did it take you to complete the assigned task?</label>
+            <select id="task_completion_time" name="task_completion_time">
+                <option value="">-- Please select --</option>
+                <option value="Less than 2 minutes">Less than 2 minutes</option>
+                <option value="2-5 minutes">2-5 minutes</option>
+                <option value="5-10 minutes">5-10 minutes</option>
+                <option value="10-15 minutes">10-15 minutes</option>
+                <option value="More than 15 minutes">More than 15 minutes</option>
+            </select>
+        </div>
+        <div class="question">
+            <label for="task_difficulty">How difficult was it to complete the assigned task using this system?</label>
+            <div class="rating">
+                <label>
+                    <input type="radio" name="task_difficulty" value="1">
+                    1 - Very difficult
+                </label>
+                <label>
+                    <input type="radio" name="task_difficulty" value="2">
+                    2 - Difficult
+                </label>
+                <label>
+                    <input type="radio" name="task_difficulty" value="3">
+                    3 - Moderate
+                </label>
+                <label>
+                    <input type="radio" name="task_difficulty" value="4">
+                    4 - Easy
+                </label>
+                <label>
+                    <input type="radio" name="task_difficulty" value="5">
+                    5 - Very easy
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Open Ended</h2>
+        <div class="question">
+            <label for="strengths">What were the main strengths of the system?</label>
+            <textarea id="strengths" name="strengths"></textarea>
+        </div>
+        <div class="question">
+            <label for="weaknesses">What were the main weaknesses or areas for improvement?</label>
+            <textarea id="weaknesses" name="weaknesses"></textarea>
+        </div>
+        <div class="question">
+            <label for="suggestions">Do you have any specific suggestions for improving the system?</label>
+            <textarea id="suggestions" name="suggestions"></textarea>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Task Scenarios</h2>
+        <p>For each scenario, please use the Legal Assistance Platform to find relevant IPC sections, then answer the following questions:</p>
+        <div class="scenario">
+            <h3>Theft Case</h3>
+            <p><strong>Scenario:</strong> A person reports that their laptop was stolen from their hotel room while they were out for dinner. There was no sign of forced entry, but they are certain they locked the door. The hotel staff had access to master keys.</p>
+            <div class="question">
+                <label for="scenario_1_relevance">How relevant were the returned IPC sections for this case?</label>
+                <div class="rating">
+                    <label>
+                        <input type="radio" name="scenario_1_relevance" value="1">
+                        1 - Not relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_1_relevance" value="2">
+                        2 - Somewhat relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_1_relevance" value="3">
+                        3 - Moderately relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_1_relevance" value="4">
+                        4 - Relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_1_relevance" value="5">
+                        5 - Highly relevant
+                    </label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="scenario_1_sections">What IPC sections were returned? (Enter section numbers separated by commas)</label>
+                <input type="text" id="scenario_1_sections" name="scenario_1_sections">
+            </div>
+            <div class="question">
+                <label for="scenario_1_missing">Were any important sections missing? If so, which ones?</label>
+                <input type="text" id="scenario_1_missing" name="scenario_1_missing">
+            </div>
+            <div class="question">
+                <label for="scenario_1_comments">Any additional comments on this scenario?</label>
+                <textarea id="scenario_1_comments" name="scenario_1_comments"></textarea>
+            </div>
+        </div>
+        <div class="scenario">
+            <h3>Assault Case</h3>
+            <p><strong>Scenario:</strong> During an argument, person A pushed person B, causing them to fall and suffer a fractured wrist. Person A claims they did not intend to cause serious injury.</p>
+            <div class="question">
+                <label for="scenario_2_relevance">How relevant were the returned IPC sections for this case?</label>
+                <div class="rating">
+                    <label>
+                        <input type="radio" name="scenario_2_relevance" value="1">
+                        1 - Not relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_2_relevance" value="2">
+                        2 - Somewhat relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_2_relevance" value="3">
+                        3 - Moderately relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_2_relevance" value="4">
+                        4 - Relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_2_relevance" value="5">
+                        5 - Highly relevant
+                    </label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="scenario_2_sections">What IPC sections were returned? (Enter section numbers separated by commas)</label>
+                <input type="text" id="scenario_2_sections" name="scenario_2_sections">
+            </div>
+            <div class="question">
+                <label for="scenario_2_missing">Were any important sections missing? If so, which ones?</label>
+                <input type="text" id="scenario_2_missing" name="scenario_2_missing">
+            </div>
+            <div class="question">
+                <label for="scenario_2_comments">Any additional comments on this scenario?</label>
+                <textarea id="scenario_2_comments" name="scenario_2_comments"></textarea>
+            </div>
+        </div>
+        <div class="scenario">
+            <h3>Digital Fraud Case</h3>
+            <p><strong>Scenario:</strong> A person received an email claiming to be from their bank, asking them to update their account details. After clicking the link and entering their information, they discovered unauthorized transactions in their account totaling Rs. 50,000.</p>
+            <div class="question">
+                <label for="scenario_3_relevance">How relevant were the returned IPC sections for this case?</label>
+                <div class="rating">
+                    <label>
+                        <input type="radio" name="scenario_3_relevance" value="1">
+                        1 - Not relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_3_relevance" value="2">
+                        2 - Somewhat relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_3_relevance" value="3">
+                        3 - Moderately relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_3_relevance" value="4">
+                        4 - Relevant
+                    </label>
+                    <label>
+                        <input type="radio" name="scenario_3_relevance" value="5">
+                        5 - Highly relevant
+                    </label>
+                </div>
+            </div>
+            <div class="question">
+                <label for="scenario_3_sections">What IPC sections were returned? (Enter section numbers separated by commas)</label>
+                <input type="text" id="scenario_3_sections" name="scenario_3_sections">
+            </div>
+            <div class="question">
+                <label for="scenario_3_missing">Were any important sections missing? If so, which ones?</label>
+                <input type="text" id="scenario_3_missing" name="scenario_3_missing">
+            </div>
+            <div class="question">
+                <label for="scenario_3_comments">Any additional comments on this scenario?</label>
+                <textarea id="scenario_3_comments" name="scenario_3_comments"></textarea>
+            </div>
+        </div>
+    </div>
+    <button type="submit">Submit Survey</button>
+    </form>
+    <script>
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Thank you for completing the survey! In a real implementation, this data would be saved.");
+            // In a real implementation, data would be sent to a server or saved locally
+        });
+    </script>
+</body>
+</html>

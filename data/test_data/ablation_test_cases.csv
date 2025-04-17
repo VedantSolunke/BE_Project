@@ -1,0 +1,11 @@
+id,description,ground_truth
+1,"A person stole my mobile phone from my pocket while I was on a bus","378,379,356"
+2,"My neighbor has been threatening me with violence if I don't sell my property to him","503,506,447"
+3,"Someone hacked into my email account and sent inappropriate messages to my colleagues","66C,66D,419"
+4,"A group of individuals have been regularly harassing me based on my religion","295A,153A,506"
+5,"A company promised certain features in their product but failed to deliver as per contract","420,406,415"
+6,"A street vendor attacked me with a knife when I refused to buy his goods","324,307,506"
+7,"My business competitor is spreading false information about my product quality","499,500,502"
+8,"A government official demanded money to process my building permit application","7,13,409"
+9,"My former employee stole confidential company data and is using it in their new business","408,381,405"
+10,"I was assaulted at a political rally for supporting a particular candidate","323,153,506"
