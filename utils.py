@@ -69,11 +69,15 @@ def get_embedding(text, api_key):
         
         from langchain_openai import OpenAIEmbeddings
         
-        # Initialize OpenAI embeddings - pass the API key and model, but don't pass callbacks
-        # in model_kwargs as they're not supported in the embed_query method
+        # Initialize OpenAI embeddings with minimal parameters to avoid compatibility issues
+        # Some parameters like 'proxies' might be causing problems in certain environments
         embeddings = OpenAIEmbeddings(
             model="text-embedding-ada-002",
-            openai_api_key=api_key
+            openai_api_key=api_key,
+            # Explicitly set default values and avoid any extra parameters
+            chunk_size=1000,
+            max_retries=6,
+            request_timeout=60
         )
         
         # Get embedding
@@ -81,8 +85,17 @@ def get_embedding(text, api_key):
         
         return embedding
     except Exception as e:
-        logger.error(f"Error in get_embedding: {str(e)}")
-        raise
+        # Try a fallback initialization if the first attempt fails
+        logger.warning(f"First embedding attempt failed: {str(e)}")
+        try:
+            from langchain_openai import OpenAIEmbeddings
+            # Alternative: even more minimal initialization
+            embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+            embedding = embeddings.embed_query(text)
+            return embedding
+        except Exception as fallback_error:
+            logger.error(f"Error in get_embedding (fallback also failed): {str(fallback_error)}")
+            raise
 
 class LegalAnalysis(BaseModel):
     """Model for LLM output of legal analysis"""
