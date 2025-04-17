@@ -228,9 +228,10 @@ def main():
         if user_input:
             with st.spinner("🔄 Analyzing your case..."):
                 try:
-                    # Create a run name for LangSmith tracing
+                    # Create a run name for LangSmith tracing if available
                     run_name = f"Legal Analysis - {user_input[:30]}..." if len(user_input) > 30 else user_input
-                    tracer.run_name = run_name
+                    if tracer is not None:
+                        tracer.run_name = run_name
                     
                     # Setup Streamlit callback handler for live updates
                     st_callback = StreamlitCallbackHandler(st.container())
@@ -244,7 +245,7 @@ def main():
                     
                     # NEW: Analyze results with LLM with visual tracing
                     with st.spinner("🧠 Generating legal analysis..."):
-                        llm_analysis = analyze_with_llm(user_query, formatted_results)
+                        llm_analysis = analyze_with_llm(user_input, formatted_results)
                     
                     # Display LangSmith project info if tracing is enabled
                     if tracer is not None:
