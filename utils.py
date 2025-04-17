@@ -38,10 +38,20 @@ logger = logging.getLogger(__name__)
 # Initialize OpenAI API directly
 api_key = os.getenv("OPENAI_API_KEY")
 
-# Create LangChain tracer
-tracer = LangChainTracer(
-    project_name=langsmith_project
-)
+# Create LangChain tracer only if API key is available
+langsmith_api_key = os.getenv("LANGSMITH_API_KEY", "")
+if langsmith_api_key:
+    try:
+        tracer = LangChainTracer(
+            project_name=langsmith_project
+        )
+        logger.info("LangSmith tracing enabled")
+    except Exception as e:
+        logger.warning(f"Failed to initialize LangSmith tracer: {str(e)}")
+        tracer = None
+else:
+    logger.warning("LangSmith API key not provided, tracing disabled")
+    tracer = None
 
 def get_embedding(text, api_key):
     """
@@ -332,8 +342,6 @@ def analyze_with_llm(user_query, formatted_results):
         run_id = str(uuid.uuid4())
         
         # Create prompt template using LangChain
-        # system_template = "You are a legal assistant specialized in Indian Penal Code (IPC)."
-
         system_template = (
             "You are a knowledgeable and detail-oriented legal assistant "
             "with expertise in the Indian Penal Code (IPC). Your role is to analyze legal cases, "
@@ -362,12 +370,17 @@ def analyze_with_llm(user_query, formatted_results):
         Format your response as bullet points for clarity and conciseness.
         """
         
-        # Initialize the ChatOpenAI model with tracing enabled
+        # Initialize callbacks list based on tracer availability
+        callbacks = []
+        if tracer is not None:
+            callbacks.append(tracer)
+        
+        # Initialize the ChatOpenAI model with optional tracing
         chat = ChatOpenAI(
             temperature=0.2,
             model="gpt-3.5-turbo",
             streaming=False,
-            callbacks=[tracer]
+            callbacks=callbacks if callbacks else None
         )
         
         # Create messages
@@ -378,10 +391,11 @@ def analyze_with_llm(user_query, formatted_results):
         
         logger.info("Sending request to LLM using LangChain...")
         
-        # Use LangChain's chat model with tracing
-        response = chat(messages, callbacks=[tracer])
+        # Use LangChain's chat model with optional tracing
+        response = chat(messages, callbacks=callbacks if callbacks else None)
         
-        logger.info("Successfully generated LLM analysis with LangChain tracing")
+        tracing_status = "with tracing" if tracer is not None else "without tracing"
+        logger.info(f"Successfully generated LLM analysis {tracing_status}")
         
         # Create a structured analysis result
         analysis_result = {

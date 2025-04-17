@@ -244,11 +244,15 @@ def main():
                     
                     # NEW: Analyze results with LLM with visual tracing
                     with st.spinner("🧠 Generating legal analysis..."):
-                        llm_analysis = analyze_with_llm(user_input, formatted_results)
+                        llm_analysis = analyze_with_llm(user_query, formatted_results)
                     
-                    # Display LangSmith project info
-                    st.sidebar.markdown("### 📊 LangSmith Tracking")
-                    st.sidebar.info(f"This session is being tracked in LangSmith project: **{langsmith_project}**")
+                    # Display LangSmith project info if tracing is enabled
+                    if tracer is not None:
+                        st.sidebar.markdown("### 📊 LangSmith Tracking")
+                        st.sidebar.info(f"This session is being tracked in LangSmith project: **{langsmith_project}**")
+                    else:
+                        st.sidebar.markdown("### ℹ️ Info")
+                        st.sidebar.info("LangSmith tracing is disabled. Running in standalone mode.")
                     
                     # NEW: Display LLM Analysis first
                     st.markdown("## 🧠 Legal Analysis of Your Case")
