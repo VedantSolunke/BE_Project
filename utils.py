@@ -67,35 +67,40 @@ def get_embedding(text, api_key):
     try:
         logger.info("Getting embedding for query using LangChain")
         
-        from langchain_openai import OpenAIEmbeddings
-        
-        # Initialize OpenAI embeddings with minimal parameters to avoid compatibility issues
-        # Some parameters like 'proxies' might be causing problems in certain environments
-        embeddings = OpenAIEmbeddings(
-            model="text-embedding-ada-002",
-            openai_api_key=api_key,
-            # Explicitly set default values and avoid any extra parameters
-            chunk_size=1000,
-            max_retries=6,
-            request_timeout=60
-        )
-        
-        # Get embedding
-        embedding = embeddings.embed_query(text)
-        
-        return embedding
-    except Exception as e:
-        # Try a fallback initialization if the first attempt fails
-        logger.warning(f"First embedding attempt failed: {str(e)}")
+        # Try direct OpenAI API call first to avoid LangChain's extra parameters
         try:
-            from langchain_openai import OpenAIEmbeddings
-            # Alternative: even more minimal initialization
-            embeddings = OpenAIEmbeddings(openai_api_key=api_key)
-            embedding = embeddings.embed_query(text)
+            import openai
+            client = openai.OpenAI(api_key=api_key)
+            response = client.embeddings.create(
+                model="text-embedding-ada-002",
+                input=text
+            )
+            embedding = response.data[0].embedding
+            logger.info("Successfully generated embedding using direct OpenAI API")
             return embedding
-        except Exception as fallback_error:
-            logger.error(f"Error in get_embedding (fallback also failed): {str(fallback_error)}")
-            raise
+        except Exception as direct_error:
+            logger.warning(f"Direct OpenAI API call failed: {str(direct_error)}")
+            
+            # Fallback to a very minimal LangChain implementation
+            from langchain_openai import OpenAIEmbeddings
+            import inspect
+            
+            # Get only the parameters that OpenAIEmbeddings accepts in this environment
+            init_params = inspect.signature(OpenAIEmbeddings.__init__).parameters
+            
+            # Build a dictionary with only the parameters that are actually accepted
+            embedding_kwargs = {"openai_api_key": api_key}
+            if "model" in init_params:
+                embedding_kwargs["model"] = "text-embedding-ada-002"
+                
+            embeddings = OpenAIEmbeddings(**embedding_kwargs)
+            embedding = embeddings.embed_query(text)
+            logger.info("Successfully generated embedding using minimal LangChain parameters")
+            return embedding
+            
+    except Exception as e:
+        logger.error(f"All embedding attempts failed: {str(e)}")
+        raise
 
 class LegalAnalysis(BaseModel):
     """Model for LLM output of legal analysis"""
