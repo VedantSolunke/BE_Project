@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: legal-vault
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+    plan: free
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: LANGSMITH_API_KEY
+        sync: false
+      - key: LANGSMITH_PROJECT
+        value: pr-gripping-skunk-72
+      - key: LANGSMITH_TRACING
+        value: true

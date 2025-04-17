@@ -253,11 +253,13 @@ def main():
                     # NEW: Display LLM Analysis first
                     st.markdown("## 🧠 Legal Analysis of Your Case")
                     
+                    # Fix: Using raw string literals to handle backslashes correctly
+                    summary_html = llm_analysis['summary'].replace('\n', '<br>').replace('•', '<div class="bullet-point">').replace('\n-', '</div><div class="bullet-point">')
                     st.markdown(
                         f"""<div class="llm-container">
                             <h2>LLM-Based Analysis & Recommendations</h2>
                             <div class="llm-summary">
-                                {llm_analysis['summary'].replace('\n', '<br>').replace('•', '<div class="bullet-point">').replace('\n-', '</div><div class="bullet-point">')}
+                                {summary_html}
                             </div>
                         </div>""",
                         unsafe_allow_html=True
